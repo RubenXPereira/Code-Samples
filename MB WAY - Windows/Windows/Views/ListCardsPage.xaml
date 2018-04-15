@@ -1,0 +1,131 @@
+﻿<common:BasePage
+    x:Class="SIBS.MBWAY.Windows.Views.Card.ListCardsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="using:SIBS.MBWAY.Windows.Common"
+    xmlns:controls="using:LightStone.Controls"
+    DataContext="{Binding Source={StaticResource Locator}, Path=ListCardsViewModel}">
+
+    <Grid>
+
+        <Grid Background="{StaticResource PageBackgroundMbWay}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"></RowDefinition>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Style="{StaticResource BackButtonStyle}" Command="{Binding ExitCommand}" VerticalAlignment="Top" />
+                <TextBlock Grid.Column="1" x:Uid="TextBlockTitleListCards" Style="{StaticResource TextBlockMbWayPageTitlesStyle}" />
+            </Grid>
+
+            <Grid Grid.Row="2" Visibility="{Binding IsToHideControls, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter='Inverted', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0, -80, 0, 0">
+                    
+                    <controls:LightStone ItemsSource="{Binding Cards}"
+                        SelectedIndex="{Binding SelectedIndexCard, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        VerticalAlignment="Top"
+                        ItemTemplate="{StaticResource DataTemplateCard}"
+                        TransitionDuration="200"
+                        Depth="80"
+                        MaxVisibleItems="4"
+                        Height="280"
+                        x:Name="flipViewCards"
+                        Rotation="40"
+                        Margin="0, -40, 0, 80"
+                        TranslateY="0"
+                        TranslateX="0">
+                        <controls:LightStone.EasingFunction>
+                            <CubicEase EasingMode="EaseOut" />
+                        </controls:LightStone.EasingFunction>
+                    </controls:LightStone>
+
+                    <TextBlock Text="{Binding SelectedCard.Name}" Style="{StaticResource TextBlockMbWayStyle}" Foreground="Black" FontSize="23" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, -100, 0, 0" />
+
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, -70, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Visibility="Visible"><!-- To guarantee reserved layout space -->
+                            <TextBlock Text="" Style="{StaticResource TextBlockMbWayStyle}" Foreground="{StaticResource MbWayDefaultForTransfersCompras}" FontSize="15" />
+                        </Grid>
+                        <Grid Grid.Row="0" Visibility="{Binding SelectedCard, Converter={StaticResource BooleanToCardsDefaultForTransfersConverter}}">
+                            <TextBlock x:Uid="TextBlockDefaultTransfers" Style="{StaticResource TextBlockMbWayStyle}" Foreground="{StaticResource MbWayDefaultForTransfersCompras}" FontSize="15"  />
+                        </Grid>
+                        <Grid Grid.Row="0" Visibility="{Binding SelectedCard, Converter={StaticResource BooleanToCardsDefaultForTransfersComprasConverter}}">
+                            <TextBlock x:Uid="TextBlockDefaultTransfersCompras" Style="{StaticResource TextBlockMbWayStyle}" Foreground="{StaticResource MbWayDefaultForTransfersCompras}" FontSize="15"  />
+                        </Grid>
+                        <Grid Grid.Row="0" Visibility="{Binding SelectedCard, Converter={StaticResource BooleanToCardsDefaultForComprasConverter}}">
+                            <TextBlock x:Uid="TextBlockDefaultCompras" Style="{StaticResource TextBlockMbWayStyle}" Foreground="{StaticResource MbWayDefaultForTransfersCompras}" FontSize="15"  />
+                        </Grid>
+                    </Grid>
+
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, -30, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource TransferTileMbWayButtonStyle}" Command="{Binding GoToTransferCommand}" />
+                            <Button Grid.Column="1" Style="{StaticResource MBNetGenerateCardTileMbWayButtonStyle}" Command="{Binding GoToGenerateCardCommand}" Margin="10,0,0,0" />
+                            <Button Grid.Column="2" Style="{StaticResource MBWAYWithdrawalTileMbWayButtonStyle}" Command="{Binding GoToMBWAYWithdrawalCommand}" Margin="10,0,0,0" />
+                        </Grid>
+                        <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Style="{StaticResource ConsultCardTileMbWayButtonStyle}" Command="{Binding GoToMovementsByCardCommand}" />
+                            <Button Grid.Column="1" Style="{StaticResource MBNetCardsTileMbWayButtonStyle}" Command="{Binding GoToMBNETCardsCommand}" Margin="10,0,0,0" />
+                            <Button Grid.Column="2" Style="{StaticResource PaymentTileMbWayButtonStyle}" Command="{Binding GoToPaymentCommand}" Margin="10,0,0,0" />
+                        </Grid>
+                    </Grid>
+                    
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    
+                    <Grid Height="2" Background="{StaticResource MbWayDarkGray}" VerticalAlignment="Top" Margin="0, 20, 0, 10" />
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <Grid Visibility="{Binding LoadedServiceParameters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid VerticalAlignment="Center" Margin="0, -10, 0, 0">
+                                <TextBlock x:Uid="TextBlockMainPageLastAccess" HorizontalAlignment="Center" Margin="0, 30, 0, 30" VerticalAlignment="Top" FontSize="22" Foreground="Black" Style="{StaticResource TextBlockMbWayStyle}" />
+                                <TextBlock Text="{Binding AppServiceParameters.LastAccessDateMilliseconds, Converter={StaticResource DateTimeMillisecondsToCustomStringConverter}, ConverterParameter='formatCardsPage'}" HorizontalAlignment="Center" Margin="0, 70, 0, 0" VerticalAlignment="Top" Style="{StaticResource TextBlockMbWayStyle}" FontSize="22" Foreground="Black" />
+                                <TextBlock Text="{Binding AppServiceParameters.DeviceNameFormatted}" HorizontalAlignment="Center" Margin="0, 120, 0, 20" VerticalAlignment="Top" Style="{StaticResource TextBlockMbWayStyle}" FontSize="22" Foreground="Black" Visibility="Collapsed" />
+                            </Grid>
+                        </Grid>
+                        <Grid Visibility="{Binding LoadedServiceParametersError, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid VerticalAlignment="Center" Margin="0, -10, 0, 0">
+                                <TextBlock x:Uid="TextBlockMainPageLastAccess" HorizontalAlignment="Center" Margin="0, 20, 0, 40" VerticalAlignment="Top" FontSize="22" Foreground="Black" Style="{StaticResource TextBlockMbWayStyle}" />
+                                <TextBlock x:Uid="TextBlockMainPageLastAccessInfoUnavailable" HorizontalAlignment="Center" Margin="0, 80, 0, 0" VerticalAlignment="Top" Style="{StaticResource TextBlockMbWayStyle}" FontSize="22" Foreground="Black" />
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                    <Button IsHitTestVisible="False" Opacity="0" IsTabStop="True" TabIndex="0" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</common:BasePage>

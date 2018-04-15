@@ -1,0 +1,70 @@
+﻿<common:BasePage
+    x:Class="SIBS.MBWAY.Windows.Views.Card.OngoingWithdrawalPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:SIBS.MBWAY.Windows.Common"
+    mc:Ignorable="d"
+    xmlns:picker="using:SIBS.MBWAY.Windows.Controls.Picker"
+    DataContext="{Binding Source={StaticResource Locator}, Path=OngoingWithdrawalViewModel}">
+
+    <Grid Background="{StaticResource PageBackgroundMbWay}">
+
+        <ScrollViewer VerticalScrollMode="Enabled">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+
+                    <StackPanel Orientation="Vertical">
+
+                        <TextBlock Text="{Binding WithdrawalAmount}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 70, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="35" Foreground="Black"></TextBlock>
+
+                        <TextBlock x:Uid="TextBlockWithdrawalCode" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 50, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Gray"></TextBlock>
+
+                        <TextBlock Text="{Binding WithdrawalCode}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 20, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="35" Foreground="Black"></TextBlock>
+
+                        <Grid Margin="50, 50, 50, 40" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" x:Uid="TextBlockWithdrawalValidityLabel" Style="{StaticResource TextBlockMbWayStyle}" VerticalAlignment="Center" Foreground="Gray" FontSize="20" />
+
+                            <TextBlock Grid.Column="1" Text="{Binding WithdrawalValidity, Mode=TwoWay}" Style="{StaticResource TextBlockMbWayStyle}" VerticalAlignment="Center" Foreground="Black" FontSize="20" />
+
+                        </Grid>
+
+                        <Grid Height="1" Background="{StaticResource MbWayGray}"></Grid>
+
+                        <TextBlock x:Uid="TextBlockWithdrawalCodeSentLabel" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 30, 50, 10" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Gray" Visibility="{Binding HasContactNumber, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+
+                        <TextBlock Text="{Binding ContactName}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 20, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Black" Visibility="{Binding ContactName, Converter={StaticResource StringToVisibilityConverter}}"></TextBlock>
+
+                        <TextBlock Text="{Binding ContactNumber}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 20, 50, 30" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Black" Visibility="{Binding HasContactNumber, Converter={StaticResource BooleanToVisibilityConverter}}"></TextBlock>
+
+                        <Grid Height="1" Background="{StaticResource MbWayGray}" Visibility="{Binding HasContactNumber, Converter={StaticResource BooleanToVisibilityConverter}}"></Grid>
+
+                        <TextBlock x:Uid="TextBlockHowToWithdrawalLabel" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 50, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Black"></TextBlock>
+
+                        <TextBlock x:Uid="TextBlockHowToWithdrawalDescription" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 20, 50, 50" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Gray"></TextBlock>
+
+                    </StackPanel>
+
+                </Grid>
+
+                <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,30,0,0">
+                    <Button Style="{StaticResource MainButtontyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" x:Name="ButtonOk" x:Uid="ButtonOk" Click="Button_ClickOK" />
+                </Grid>
+
+            </Grid>
+            
+        </ScrollViewer>
+        
+    </Grid>
+</common:BasePage>

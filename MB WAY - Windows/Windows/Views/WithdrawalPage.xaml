@@ -1,0 +1,168 @@
+﻿<common:BasePage
+    x:Class="SIBS.MBWAY.Windows.Views.Card.WithdrawalPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:common="using:SIBS.MBWAY.Windows.Common"
+    xmlns:cards="using:SIBS.MBWAY.Windows.Controls.Cards"
+    mc:Ignorable="d"
+    DataContext="{Binding Source={StaticResource Locator}, Path=WithdrawalViewModel}">
+
+    <Grid>
+        <ScrollViewer x:Name="myScrollViewer" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" ZoomMode="Disabled" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+            <Grid Background="{StaticResource PageBackgroundMbWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Style="{StaticResource BackButtonStyle}" Command="{Binding GoBackCommand}" VerticalAlignment="Top" />
+                    <TextBlock Grid.Column="1" x:Uid="TextBlockWithdrawalPageTitle" Style="{StaticResource TextBlockMbWayPageTitlesStyle}" />
+                </Grid>
+
+                <Grid Grid.Row="2">
+
+                    <Grid Name="gridContent" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="83"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="1" VerticalAlignment="Center" Width="441" Height="285">
+                            <cards:UserControlCard VerticalAlignment="Center" />
+                        </Grid>
+
+                        <Grid Grid.Column="3" Width="500">
+                            <Border BorderBrush="{StaticResource MbWayDarkGray}" BorderThickness="1" />
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <TextBlock x:Uid="TextBlockWithdrawalTitle" Style="{StaticResource TextBlockMbWayStyle}" Foreground="Black" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 15, 0, 15" Visibility="Collapsed" />
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="Auto"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid Height="1" Background="{StaticResource MbWayGray}" VerticalAlignment="Top" Visibility="Collapsed"></Grid>
+
+                                        <ScrollViewer VerticalScrollMode="Enabled" VerticalScrollBarVisibility="Hidden">
+
+                                            <StackPanel Orientation="Vertical">
+
+                                                <!-- Withdrawal default options -->
+                                                <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0, 60, 0, 0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                        <RowDefinition Height="*"></RowDefinition>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0" HorizontalAlignment="Center">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button Grid.Column="0" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[0], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[0]}" />
+                                                        <Button Grid.Column="1" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[1], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[1]}" Margin="10,0,0,0" />
+                                                        <Button Grid.Column="2" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[2], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[2]}" Margin="10,0,0,0" />
+                                                    </Grid>
+                                                    <Grid Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button Grid.Column="0" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[3], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[3]}" />
+                                                        <Button Grid.Column="1" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[4], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[4]}" Margin="10,0,0,0" />
+                                                        <Button Grid.Column="2" Style="{StaticResource MBWAYWithdrawalAmountTileButtonStyle}" Content="{Binding WithdrawalValues[5], Mode=TwoWay}" Command="{Binding ChangeSelectionCommand}" CommandParameter="{Binding WithdrawalValues[5]}" Margin="10,0,0,0" />
+                                                    </Grid>
+                                                </Grid>
+
+                                                <TextBlock x:Uid="TextBlockWithdrawalOtherAmount" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 40, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="20" Foreground="Black"></TextBlock>
+
+                                                <TextBlock Text="{Binding WithdrawalDescription}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="50, 10, 50, 0" TextAlignment="Center" Style="{StaticResource TextBlockMbWayStyle}" TextWrapping="Wrap" FontSize="18" Foreground="Gray"></TextBlock>
+
+                                                <StackPanel Orientation="Vertical" Margin="50, 20, 50, 0">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="30"></ColumnDefinition>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <TextBlock Grid.Column="0" HorizontalAlignment="Left" Style="{StaticResource TextBlockMbWayStyle}" Text="{Binding CurrencyType}" VerticalAlignment="Center" Foreground="Black" FontSize="26" />
+
+                                                        <TextBox Grid.Column="1" x:Name="withdrawalAmount" Style="{Binding WithdrawalAmountTextBoxStyle, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Text="{Binding WithdrawalAmount, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" InputScope="NumberFullWidth" KeyUp="amountTb_OnKeyUp" MaxLength="4" />
+
+                                                    </Grid>
+
+                                                    <TextBlock HorizontalAlignment="Left" x:Name="ErrorMessage" Style="{StaticResource TextBlockMbWayStyle}" Margin="35,10,0,0" Text="{Binding WithdrawalAmountErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Top" Foreground="{StaticResource MbWayBackgroundColorRed}" FontSize="14" />
+
+                                                </StackPanel>
+
+                                                <HyperlinkButton x:Name="hyperLinkWithdrawalToOtherLabel" Foreground="{StaticResource MbWayHyperlinkColor}" FontSize="18" FontFamily="{StaticResource FontFamilyMbWayMuli}" HorizontalAlignment="Center" Margin="25,10,25,0" Click="WithdrawalToOther_Click">
+                                                    <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+                                                        <Underline>
+                                                            <Run x:Uid="TextBlockWithdrawalToOtherLabel" />
+                                                        </Underline>
+                                                    </TextBlock>
+                                                </HyperlinkButton>
+
+                                                <Grid Visibility="{Binding ShowContactFields, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <TextBlock x:Uid="TextBlockWithdrawalToOtherInstructions" Style="{StaticResource TextBlockMbWayStyle}" Foreground="Gray" FontSize="17" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="25,10,25,0" />
+                                                    <Grid Margin="36, 40, 36, 0" Grid.ColumnSpan="2">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                                            <ColumnDefinition Width="60"></ColumnDefinition>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox Grid.Column="0" x:Name="ContactTb" Style="{Binding ContactTextBoxStyle}" HorizontalAlignment="Stretch" Text="{Binding ContactNumber, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" VerticalAlignment="Center" InputScope="NumberFullWidth" KeyUp="ContactTb_OnKeyUp"/>
+                                                        <Button Grid.Column="1" Style="{StaticResource ContactsButtonStyle}" HorizontalAlignment="Right" VerticalAlignment="Center" Click="pickContactsBt_Click" Margin="0, 0, 5, 0" />
+                                                    </Grid>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding ContactName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Margin="36,100,0,0" Foreground="Black" Style="{StaticResource TextBlockMbWayStyle}" FontSize="15"/>
+                                                    <TextBlock HorizontalAlignment="Left" Text="{Binding ContactNumberErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Margin="36,100,0,0" Foreground="{StaticResource MbWayColorRed}" Style="{StaticResource TextBlockMbWayStyle}" FontSize="14"/>
+                                                </Grid>
+
+                                                <Grid Visibility="{Binding ShowContactFields, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                    <Grid VerticalAlignment="Top" Visibility="{Binding AllowInternationalNumbers, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="36, 25, 36, 0">
+                                                        <TextBlock x:Uid="TextBlockCountryTitle" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" FontSize="20" Style="{StaticResource TextBlockMbWayStyle}"/>
+
+                                                        <Button Content="27" VerticalAlignment="Top" Margin="0,30,0,0" HorizontalAlignment="Stretch" Click="ListPickerButton_Click" Style="{StaticResource CountryButtontyle}" />
+                                                        <TextBlock HorizontalAlignment="Left" Text="{Binding CountryPickerErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" VerticalAlignment="Top" Margin="0,73,0,0" Foreground="{StaticResource MbWayColorRed}" Style="{StaticResource TextBlockMbWayStyle}" FontSize="14"/>
+                                                    </Grid>
+                                                </Grid>
+
+                                            </StackPanel>
+
+                                        </ScrollViewer>
+
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 20, 20">
+                                        <Button Grid.Column="0" Style="{StaticResource MainButtontyle}" VerticalAlignment="Bottom" x:Name="ButtonOk" x:Uid="ButtonOk" Click="Button_ClickOK" />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</common:BasePage>
