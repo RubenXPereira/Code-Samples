@@ -1,0 +1,128 @@
+﻿<UserControl x:Class="Shop.Freital.Modules.Melting.Widgets.LiveChartWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:itcl="http://schemas.inteco.at/winfx/xaml/localization"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" 
+                       Text="{itcl:TranslateUpper Trend}" 
+                       Margin="8,4,32,12" 
+                       FontSize="19" 
+                       FontWeight="SemiBold" 
+                       Foreground="{DynamicResource AccentColorBrush}" />
+            
+            <oxy:Plot Background="Transparent"
+                      PlotAreaBorderThickness="0 0 0 2"
+                      PlotAreaBorderColor="Gray"
+                      LegendPosition="BottomLeft"
+                      LegendOrientation="Horizontal"
+                      LegendPlacement="Outside"
+                      x:Name="TrendPlot"
+                      Visibility="{Binding ShowPlot, Converter={StaticResource BooleanToVisibilityConverter}, NotifyOnSourceUpdated=True}">
+                <oxy:Plot.Axes>
+                    <oxy:DateTimeAxis Title="{itcl:Translate Time}"
+                                      StringFormat="T"
+                                      Position="Bottom"
+                                      TicklineColor="Gray"
+                                      MajorGridlineColor="Gray"
+                                      MajorGridlineStyle="Dash" />
+                    
+                    <oxy:LinearAxis Key="currentAndVoltage"
+                                    Title="{itcl:Translate CurrentAndVoltage}"
+                                    Position="Right"
+                                    Minimum="0"
+                                    TicklineColor="Red"
+                                    TitleColor="Red"
+                                    TextColor="Red" />
+                    
+                    <oxy:LinearAxis Key="swingAndResistance"
+                                    Title="{itcl:Translate SwingAndResistance}"
+                                    Position="Right"
+                                    PositionTier="1"
+                                    Minimum="0"
+                                    TicklineColor="Violet"
+                                    TitleColor="Violet"
+                                    TextColor="Violet" />
+                    
+                    <oxy:LinearAxis Key="powerAndMeltrate"
+                                    Title="{itcl:Translate PowerAndMeltrate}"
+                                    Position="Left"
+                                    Minimum="0"
+                                    TicklineColor="LightSeaGreen"
+                                    TitleColor="LightSeaGreen"
+                                    TextColor="LightSeaGreen" />
+
+                    <oxy:LinearAxis Key="electrodeAndIngot"
+                                    Title="{itcl:Translate ElectrodeWeightElectrodePositionAndIngotWeight}"
+                                    Position="Left"
+                                    PositionTier="1"
+                                    Minimum="0"
+                                    TicklineColor="DarkOrange"
+                                    TitleColor="DarkOrange"
+                                    TextColor="DarkOrange" />
+                </oxy:Plot.Axes>
+
+                <oxy:Plot.Series>
+                    <oxy:LineSeries Title="{itcl:Translate Current}"
+                                    x:Name="currentSeries"
+                                    ItemsSource="{Binding DataSeries[current]}"
+                                    YAxisKey="currentAndVoltage"
+                                    Color="IndianRed" />
+                    <oxy:LineSeries Title="{itcl:Translate Voltage}"
+                                    x:Name="voltageSeries"
+                                    ItemsSource="{Binding DataSeries[voltage]}"
+                                    YAxisKey="currentAndVoltage"
+                                    Color="Blue" />
+
+                    <oxy:LineSeries Title="{itcl:Translate Power}"
+                                    x:Name="powerSeries"
+                                    ItemsSource="{Binding DataSeries[power]}"
+                                    YAxisKey="powerAndMeltrate"
+                                    Color="LightGreen" />
+                    <oxy:LineSeries Title="{itcl:Translate Meltrate}"
+                                    x:Name="meltrateSeries"
+                                    ItemsSource="{Binding DataSeries[meltrate]}"
+                                    YAxisKey="powerAndMeltrate"
+                                    Color="Orange" />
+
+                    <oxy:LineSeries Title="{itcl:Translate Resistance}"
+                                    x:Name="resistanceSeries"
+                                    ItemsSource="{Binding DataSeries[resistance]}"
+                                    YAxisKey="swingAndResistance"
+                                    Color="Green" />
+                    <oxy:LineSeries Title="{itcl:Translate Swing}"
+                                    x:Name="swingSeries"
+                                    ItemsSource="{Binding DataSeries[swing]}"
+                                    YAxisKey="swingAndResistance"
+                                    Color="LightBlue" />
+
+                    <oxy:LineSeries Title="{itcl:Translate ElectrodeWeight}"
+                                    x:Name="electrodeWeightSeries"
+                                    ItemsSource="{Binding DataSeries[electrodeWeight]}"
+                                    YAxisKey="electrodeAndIngot"
+                                    Color="Red" />
+                    <oxy:LineSeries Title="{itcl:Translate ElectrodePosition}"
+                                    x:Name="electrodePositionSeries"
+                                    ItemsSource="{Binding DataSeries[electrodePosition]}"
+                                    YAxisKey="electrodeAndIngot"
+                                    Color="Yellow" />
+                    <oxy:LineSeries Title="{itcl:Translate IngotWeight}"
+                                    x:Name="ingotWeightSeries"
+                                    ItemsSource="{Binding DataSeries[ingotWeight]}"
+                                    YAxisKey="electrodeAndIngot"
+                                    Color="DarkRed" />
+                </oxy:Plot.Series>
+            </oxy:Plot>
+        </DockPanel>
+    </Grid>
+</UserControl>
